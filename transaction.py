@@ -4,7 +4,7 @@ web3 = Web3(Web3.HTTPProvider(infura_url))
 print ("Conectado con Infura: " + str(web3.isConnected()))
 
 account_1 = web3.toChecksumAddress("0x341401DCe923952ec27D9D890c4d7956947EC619")
-account_2 = web3.toChecksumAddress("0x3066e155B42F8BBc4448dF1F9f46e29F2901C271")
+account_2 = web3.toChecksumAddress("0xE4783a07b97c7adC3320F393a1D386CB7A4180ec")
 
 private_key = "510EA21CF6534188791B3F1A4FD90FFCC4A7B6899460F698C081C8537D7FEC74"
 
