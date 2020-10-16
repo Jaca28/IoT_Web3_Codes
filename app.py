@@ -19,9 +19,9 @@ def transaction(nit, calf, comen):
  contractAddress = web3.toChecksumAddress("0x3ecD2b5D67694240945c66aeb356dDcFbf0Df654")
  #print (web3.isAddress('0x341401DCe923952ec27D9D890c4d7956947EC619'))
  contract = web3.eth.contract(address=contractAddress, abi=abi)
- print ("NIT: " + nit)
- print ("Calificación: " + calf)
- print ("Comentario: " + comen)
+ #  print ("NIT: " + nit)
+ #  print ("Calificación: " + calf)
+ #  print ("Comentario: " + comen)
  #contract.functions.newHash(var1).transact()
  nonce = web3.eth.getTransactionCount(account)
  data_tx = contract.functions.review_prov(nit, calf, comen).buildTransaction({
