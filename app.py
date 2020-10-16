@@ -3,44 +3,329 @@
 import json
 #Import web3 lib and connect with infura node
 from web3 import Web3
-def trans(var1, e1, x1):
- print("app.py Corriendo.....")
- infura_url = "https://rinkeby.infura.io/v3/162c6026989446e08fb54b3fe3888f12"
- web3 = Web3(Web3.HTTPProvider(infura_url))
- print ("Conectado con Infura: " + str(web3.isConnected()))
- #Public key
- account = web3.toChecksumAddress("0x186a991219b1ccC102e187446b27e3C70Fc696aB")
- #Private Key
- private_key = "90e30661c3b65ea1decdf51d55923e4a0069f596a678ffcfbeb965e1c769cf89"
- abi = json.loads('[{"constant":true,"inputs":[],"name":"longitud_medidas","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_hash_medidor","type":"string"},{"name":"_energia","type":"uint256"},{"name":"_tiempo","type":"string"}],"name":"nueva_medida","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"},{"name":"","type":"uint256"}],"name":"pk2medidas","outputs":[{"name":"ID","type":"uint256"},{"name":"hash_medidor","type":"string"},{"name":"energia","type":"uint256"},{"name":"tiempo","type":"string"},{"name":"pk_medidor","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"pk2cuenta_medidas","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"medidas","outputs":[{"name":"ID","type":"uint256"},{"name":"hash_medidor","type":"string"},{"name":"energia","type":"uint256"},{"name":"tiempo","type":"string"},{"name":"pk_medidor","type":"address"}],"payable":false,"stateMutability":"view","type":"function"}]')
- contractAddress = web3.toChecksumAddress("0xe7357d40168d23b15e7c5516b5304680aac5a358")
- #print (web3.isAddress('0x341401DCe923952ec27D9D890c4d7956947EC619'))
- contract = web3.eth.contract(address=contractAddress, abi=abi)
- print ("Contrato instanciado: " + str(contract) + "****")
- #Aleatory data generation
- #  var = uuid.uuid4().hex
- #  var1 = str(var)
- #  x = datetime.datetime.now()
- #  x1 = str(x)
+def transaction(nit, calf):
+print("app.py Corriendo.....")
+infura_url = "https://rinkeby.infura.io/v3/162c6026989446e08fb54b3fe3888f12"
+web3 = Web3(Web3.HTTPProvider(infura_url))
+print ("Conectado con Infura: " + str(web3.isConnected()))
+#Public key
+account = web3.toChecksumAddress("0x186a991219b1ccC102e187446b27e3C70Fc696aB")
+#Private Key
+private_key = "90e30661c3b65ea1decdf51d55923e4a0069f596a678ffcfbeb965e1c769cf89"
+abi = json.loads('[{
+        "inputs": [],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
+        "inputs": [{
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+        }],
+        "name": "ID2inscrito",
+        "outputs": [{
+            "internalType": "bool",
+            "name": "",
+            "type": "bool"
+        }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "IDa",
+        "outputs": [{
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+        }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "IDp",
+        "outputs": [{
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+        }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "IDu",
+        "outputs": [{
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+        }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+            "internalType": "string",
+            "name": "",
+            "type": "string"
+        }],
+        "name": "NombreProveedor2ID",
+        "outputs": [{
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+        }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+        }],
+        "name": "admins",
+        "outputs": [{
+                "internalType": "string",
+                "name": "nombre",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "cc",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "email",
+                "type": "string"
+            },
+            {
+                "internalType": "address",
+                "name": "admin_address",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+                "internalType": "string",
+                "name": "_nombre",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "_nit",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "_ciudad",
+                "type": "string"
+            }
+        ],
+        "name": "anotar_proveedor",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+            "internalType": "string",
+            "name": "_nombre",
+            "type": "string"
+        }],
+        "name": "consultar_estado_proveedor",
+        "outputs": [{
+            "internalType": "bool",
+            "name": "_inscrito",
+            "type": "bool"
+        }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+                "internalType": "string",
+                "name": "_nombre",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "_cc",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "_email",
+                "type": "string"
+            },
+            {
+                "internalType": "address",
+                "name": "_admin_address",
+                "type": "address"
+            }
+        ],
+        "name": "new_admin",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+                "internalType": "string",
+                "name": "_nombre",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "_cc",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "_email",
+                "type": "string"
+            },
+            {
+                "internalType": "address",
+                "name": "_user_address",
+                "type": "address"
+            }
+        ],
+        "name": "new_user",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "owner",
+        "outputs": [{
+            "internalType": "address",
+            "name": "",
+            "type": "address"
+        }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+        }],
+        "name": "proveedores",
+        "outputs": [{
+                "internalType": "string",
+                "name": "nombre",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "nit",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "ciudad",
+                "type": "string"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+            "internalType": "string",
+            "name": "_nit",
+            "type": "string"
+        }],
+        "name": "puntaje_proveedor",
+        "outputs": [{
+            "internalType": "uint256",
+            "name": "_puntaje_prom",
+            "type": "uint256"
+        }],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+                "internalType": "string",
+                "name": "_nit",
+                "type": "string"
+            },
+            {
+                "internalType": "uint256",
+                "name": "_calificacion",
+                "type": "uint256"
+            },
+            {
+                "internalType": "string",
+                "name": "_comentarios",
+                "type": "string"
+            }
+        ],
+        "name": "review_prov",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [{
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+        }],
+        "name": "usuarios",
+        "outputs": [{
+                "internalType": "string",
+                "name": "nombre",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "cc",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "email",
+                "type": "string"
+            },
+            {
+                "internalType": "address",
+                "name": "user_address",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    }
+]')
+contractAddress = web3.toChecksumAddress("0x3ecD2b5D67694240945c66aeb356dDcFbf0Df654")
+#print (web3.isAddress('0x341401DCe923952ec27D9D890c4d7956947EC619'))
+contract = web3.eth.contract(address=contractAddress, abi=abi)
 
- print ("Nuevo hash en app: " + var1)
- print ("Nuevo dato de energía en app: " + str(e1))
- print ("Nuevo tiempo en app: " + x1)
-
- #contract.functions.newHash(var1).transact()
- nonce = web3.eth.getTransactionCount(account)
- data_tx = contract.functions.nueva_medida(var1, e1, x1).buildTransaction({
+#contract.functions.newHash(var1).transact()
+nonce = web3.eth.getTransactionCount(account)
+data_tx = contract.functions.review_prov(nit, calf).buildTransaction({
     #'chainId': 0x1,
     'gas': 2000000,
     'gasPrice': web3.toWei('50', 'gwei'),
     'nonce': nonce,
     })
 
- print(data_tx)
- # Sign transaction
- signed_tx = web3.eth.account.signTransaction(data_tx, private_key=private_key)
- signed_tx.rawTransaction
- #Broadcast transaction
- tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
- #web3.eth.sendRawTransaction(signed_tx.rawTransaction)
- print ("Hash de la transacción: " + str(web3.toHex(tx_hash)))
+print(data_tx)
+# Sign transaction
+signed_tx = web3.eth.account.signTransaction(data_tx, private_key=private_key)
+signed_tx.rawTransaction
+#Broadcast transaction
+tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+#web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+print ("Hash de la transacción: " + str(web3.toHex(tx_hash)))
