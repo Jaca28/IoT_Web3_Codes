@@ -4,15 +4,15 @@ import json
 #Import web3 lib and connect with infura node
 from web3 import Web3
 def transaction(nit, calf):
-print("app.py Corriendo.....")
-infura_url = "https://rinkeby.infura.io/v3/162c6026989446e08fb54b3fe3888f12"
-web3 = Web3(Web3.HTTPProvider(infura_url))
-print ("Conectado con Infura: " + str(web3.isConnected()))
-#Public key
-account = web3.toChecksumAddress("0x186a991219b1ccC102e187446b27e3C70Fc696aB")
-#Private Key
-private_key = "90e30661c3b65ea1decdf51d55923e4a0069f596a678ffcfbeb965e1c769cf89"
-abi = json.loads('[{
+ print("app.py Corriendo.....")
+ infura_url = "https://rinkeby.infura.io/v3/162c6026989446e08fb54b3fe3888f12"
+ web3 = Web3(Web3.HTTPProvider(infura_url))
+ print ("Conectado con Infura: " + str(web3.isConnected()))
+ #Public key
+ account = web3.toChecksumAddress("0x186a991219b1ccC102e187446b27e3C70Fc696aB")
+ #Private Key
+ private_key = "90e30661c3b65ea1decdf51d55923e4a0069f596a678ffcfbeb965e1c769cf89"
+ abi = json.loads('[{
         "inputs": [],
         "stateMutability": "nonpayable",
         "type": "constructor"
@@ -307,25 +307,25 @@ abi = json.loads('[{
         "stateMutability": "view",
         "type": "function"
     }
-]')
-contractAddress = web3.toChecksumAddress("0x3ecD2b5D67694240945c66aeb356dDcFbf0Df654")
-#print (web3.isAddress('0x341401DCe923952ec27D9D890c4d7956947EC619'))
-contract = web3.eth.contract(address=contractAddress, abi=abi)
+ ]')
+ contractAddress = web3.toChecksumAddress("0x3ecD2b5D67694240945c66aeb356dDcFbf0Df654")
+ #print (web3.isAddress('0x341401DCe923952ec27D9D890c4d7956947EC619'))
+ contract = web3.eth.contract(address=contractAddress, abi=abi)
 
-#contract.functions.newHash(var1).transact()
-nonce = web3.eth.getTransactionCount(account)
-data_tx = contract.functions.review_prov(nit, calf).buildTransaction({
+ #contract.functions.newHash(var1).transact()
+ nonce = web3.eth.getTransactionCount(account)
+ data_tx = contract.functions.review_prov(nit, calf).buildTransaction({
     #'chainId': 0x1,
     'gas': 2000000,
     'gasPrice': web3.toWei('50', 'gwei'),
     'nonce': nonce,
     })
 
-print(data_tx)
-# Sign transaction
-signed_tx = web3.eth.account.signTransaction(data_tx, private_key=private_key)
-signed_tx.rawTransaction
-#Broadcast transaction
-tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
-#web3.eth.sendRawTransaction(signed_tx.rawTransaction)
-print ("Hash de la transacción: " + str(web3.toHex(tx_hash)))
+ print(data_tx)
+ # Sign transaction
+ signed_tx = web3.eth.account.signTransaction(data_tx, private_key=private_key)
+ signed_tx.rawTransaction
+ #Broadcast transaction
+ tx_hash = web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+ #web3.eth.sendRawTransaction(signed_tx.rawTransaction)
+ print ("Hash de la transacción: " + str(web3.toHex(tx_hash)))
