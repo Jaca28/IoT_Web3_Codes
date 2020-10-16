@@ -4,8 +4,8 @@ import json
 #Import web3 lib and connect with infura node
 from web3 import Web3
 def transaction(nit, calf, comen):
-   nit = str(nit)
-   comen = str(comen)
+ nit = str(nit)
+ comen = str(comen)
  print("app.py Corriendo.....")
  infura_url = "https://rinkeby.infura.io/v3/162c6026989446e08fb54b3fe3888f12"
  web3 = Web3(Web3.HTTPProvider(infura_url))
