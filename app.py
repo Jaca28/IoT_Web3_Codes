@@ -5,6 +5,7 @@ import json
 from web3 import Web3
 def transaction(nit, calf, comen):
  nit = str(nit)
+ calf = int(calf)
  comen = str(comen)
  print("app.py Corriendo.....")
  infura_url = "https://rinkeby.infura.io/v3/162c6026989446e08fb54b3fe3888f12"
