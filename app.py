@@ -4,6 +4,8 @@ import json
 #Import web3 lib and connect with infura node
 from web3 import Web3
 def transaction(nit, calf, comen):
+   nit = str(nit)
+   comen = str(comen)
  print("app.py Corriendo.....")
  infura_url = "https://rinkeby.infura.io/v3/162c6026989446e08fb54b3fe3888f12"
  web3 = Web3(Web3.HTTPProvider(infura_url))
@@ -16,7 +18,9 @@ def transaction(nit, calf, comen):
  contractAddress = web3.toChecksumAddress("0x3ecD2b5D67694240945c66aeb356dDcFbf0Df654")
  #print (web3.isAddress('0x341401DCe923952ec27D9D890c4d7956947EC619'))
  contract = web3.eth.contract(address=contractAddress, abi=abi)
-
+ print ("NIT: " + nit)
+ print ("Calificación: " + calf)
+ print ("Comentario: " + comen)
  #contract.functions.newHash(var1).transact()
  nonce = web3.eth.getTransactionCount(account)
  data_tx = contract.functions.review_prov(nit, calf, comen).buildTransaction({
